@@ -1,32 +1,92 @@
 var animalPopulation = 0;
+var allAnimals = [];
 
 function run(){
     var tigger = new Tiger("Tigger");
-    // tigger.eat("extract of malt");
-    // tigger.eat("kibble");
-    //
+
     var pooh = new Bear("Pooh");
-    // pooh.eat("honey");
-    // pooh.eat("meat");
-    //
+
     var piglet = new Pig("Piglet");
-    // piglet.eat("acorns");
-    // piglet.eat("slop");
-    //
+
     var owl = new Owl("Owl");
-    // owl.eat("knowledge");
-    // owl.eat("apple");
-    //
+
     var eeyore = new Donkey("Eeyore");
-    // eeyore.eat("thistles");
-    // eeyore.eat("carrot");
 
-    var chrisRobin = new Zookeeper("Christopher Robin");
-    var animalsToFeed = [tigger,pooh,piglet,owl,eeyore];
-    chrisRobin.feedAnimals("sushi",animalsToFeed);
+    listAnimal(tigger);
+    listAnimal(pooh);
+    listAnimal(piglet);
+    listAnimal(owl);
+    listAnimal(eeyore);
+    console.log(allAnimals);
+}
 
-    console.log(Animal.getPopulation());
+$(document).ready(function(){
+    $("#create").click(function (){
+        createAnimal($("#name").val());
+    });
+    $("#feed").click(function(){
+        feedAnimal($("#food").val());
+    });
+    $("#del").click(function(){
+        deleteAnimal($("#nameDel").val());
+    })
+});
 
+function createAnimal(name){
+    var animal = "";
+    switch($("#ani").val()){
+        case "Tiger":
+            animal = new Tiger(name);
+            console.log("tiger");
+            break;
+        case "Bear":
+            animal = new Bear(name);
+            console.log("bear");
+            break;
+        case "Pig":
+            animal = new Pig(name);
+            console.log("pig");
+            break;
+        case "Owl":
+            animal = new Owl(name);
+            console.log("owl");
+            break;
+        case "Donkey":
+            animal = new Donkey(name);
+            console.log("donkey");
+    }
+
+    listAnimal(animal);
+}
+
+function feedAnimal(food){
+    for(var i = 0; i <  allAnimals.length; i++){
+        allAnimals[i].eat(food);
+    }
+}
+
+function listAnimal(animal){
+    allAnimals.push(animal);
+    console.log(allAnimals);
+
+    $("#listHead").text("Your Animals");
+    var name = "";
+    var ani = "";
+    for(var i = 0; i < allAnimals.length; i++){
+        if(allAnimals[i] === animal){
+            name = allAnimals[i].name;
+            ani = allAnimals[i].constructor.name;
+            $("#list").append("<li>" + name + " the " + ani + "</li>");
+        }
+    }
+}
+
+function deleteAnimal(name){
+    for(var i = 0; i < allAnimals.length; i++){
+        if(allAnimals[i].name === name){
+            allAnimals.splice(i, 1);
+        }
+    }
 }
 
 class Animal {
@@ -37,13 +97,13 @@ class Animal {
     }
 
     sleep() {
-        console.log(this.name + " sleeps for 8 hours");
+        $("#actions").append("<div>" + this.name + " sleeps for 8 hours</div>");
 
     }
 
     eat(food) {
-        console.log(this.name + " eats " + food);
-        (food === this.favoriteFood) ? console.log("YUM!!! " + this.name + " wants more " + food) : this.sleep();
+        $("#actions").append("<div>" + this.name + " eats " + food + "</div>");
+        (food === this.favoriteFood) ? $("#actions").append("<div>YUM!!! " + this.name + " wants more " + food + "</div>") : this.sleep();
 
     }
 
@@ -54,44 +114,45 @@ class Animal {
 
 class Tiger extends Animal{
     constructor(name) {
-        super(name, "extract of malt");
+        super(name, "Extract of Malt");
     }
 }
 
 class Bear extends Animal{
     constructor(name) {
-        super(name, "honey");
+        super(name, "Honey");
     }
 
     sleep() {
-        console.log(this.name + " hibernates for 4 months");
+        $("#actions").append("<div>" + this.name + " hibernates for 4 months</div>");
     }
 }
 
 class Pig extends Animal{
     constructor(name){
-        super(name, "acorns");
+        super(name, "Acorns");
     }
 
     sleep(){
-        console.log(this.name + " sleeps in a beech tree");
+        $("#actions").append("<div>" + this.name + " sleeps in a beech tree</div>");
     }
 }
 
 class Owl extends Animal{
     constructor(name){
-        super(name, "knowledge");
+        super(name, "Knowledge");
     }
 
     eat(food){
 
-        (food === this.favoriteFood) ? super.eat("knowledge") : console.log(this.name + " eats " + food) + console.log("YUCK!!! " + this.name + " will not eat " + food);
+        (food === this.favoriteFood) ? super.eat("knowledge") : $("#actions").append("<div>" + this.name + " eats " + food + "</div>") +
+            $("#actions").append("<div>YUCK!!! " + this.name + " will not eat " + food + "</div>");
     }
 }
 
 class Donkey extends Animal{
     constructor(name){
-        super(name, "thistles");
+        super(name, "Thistles");
     }
 
     sleep(){
@@ -100,50 +161,20 @@ class Donkey extends Animal{
 
     eat(food){
 
-        (food === this.favoriteFood) ? super.eat("thistles") + this.sleep() : console.log(this.name + " eats " + food) + console.log("YUCK!!! " + this.name + " will not eat " + food);
+        (food === this.favoriteFood) ? super.eat("thistles") + this.sleep() : $("#actions").append("<div>" + this.name + " eats " +
+            food + "</div>") + $("#actions").append("<div>YUCK!!! " + this.name + " will not eat " + food + "</div>");
     }
 }
 
-class Zookeeper{
-    constructor(name){
-        this.name = name;
-    }
-
-    feedAnimals(food, animals){
-        console.log(this.name + " is feeding " + food + " to " + animals.length + " animals " + animalPopulation + " total animals");
-        for(var i = 0; i < animals.length; i++){
-            animals[i].eat(food);
-        }
-    }
-}
-/*class Shape {
-
-    constructor(name) {
-        this.name = name;
-        this.special = true;
-    }
-
-    sayName() {
-        console.log('Hi, I am a ', this.name + '.');
-    }
-
-    sayHistory() {
-        console.log("Shapes have a wonderful history.");
-    }
-}
-
-
-class Polygon extends Shape{
-
-    constructor(height, width) {
-        super('Polygon');
-        this.height = height;
-        this.width = width;
-    }
-
-    //method #2
-    sayHistory() {
-        console.log('"Polygon" is derived from the Greek polus (many) and gonia (angle).');
-    }
-
-}*/
+// class Zookeeper{
+//     constructor(name){
+//         this.name = name;
+//     }
+//
+//     feedAnimals(food, animals){
+//         console.log(this.name + " is feeding " + food + " to " + animals.length + " animals " + animalPopulation + " total animals");
+//         for(var i = 0; i < animals.length; i++){
+//             animals[i].eat(food);
+//         }
+//     }
+// }

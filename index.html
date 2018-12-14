@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="zoo.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<button onclick="run()">button</button>
+<body onload="run()">
+<h1>Pooh in a Zoo</h1>
+<div id="createAnimal">
+    <div>Animal Name:</div>
+    <input type="text" id="name"><br>
+    <select id="ani">
+        <option>Tiger</option>
+        <option>Bear</option>
+        <option>Pig</option>
+        <option>Owl</option>
+        <option>Donkey</option>
+    </select>
+    <button id="create">Create Animal</button>
+</div>
+<div id="feedAnimal">
+    <select id="food">
+        <option>Extract of Malt</option>
+        <option>Honey</option>
+        <option>Acorns</option>
+        <option>Knowledge</option>
+        <option>Thistles</option>
+    </select>
+    <button id="feed">Feed</button>
+</div>
+<div id="deleteAnimal">
+    <div>Animal to be Deleted</div>
+    <input type="text" id="nameDel">
+    <button id="del">Delete</button>
+</div>
+<div id="print">
+    <div id="listHead"></div>
+    <ul id="list">
+    </ul>
+</div>
+<div id="actions">
+
+</div>
+<!--button onclick="run()" id="a">button</--button-->
 </body>
 </html>
