@@ -2,15 +2,15 @@ var animalPopulation = 0;
 var allAnimals = [];
 
 function run(){
-    var tigger = new Tiger("Tigger");
+    var tigger = new Trex("Tigger");
 
-    var pooh = new Bear("Pooh");
+    var pooh = new Triceratops("Pooh");
 
-    var piglet = new Pig("Piglet");
+    var piglet = new Velociraptor("Piglet");
 
-    var owl = new Owl("Owl");
+    var owl = new Pteradactyl("Pteradactyl");
 
-    var eeyore = new Donkey("Eeyore");
+    var eeyore = new Brontosauras("Eeyore");
 
     listAnimal(tigger);
     listAnimal(pooh);
@@ -35,25 +35,25 @@ $(document).ready(function(){
 function createAnimal(name){
     var animal = "";
     switch($("#ani").val()){
-        case "Tiger":
-            animal = new Tiger(name);
-            console.log("tiger");
+        case "Trex":
+            animal = new Trex(name);
+            console.log("trex");
             break;
-        case "Bear":
-            animal = new Bear(name);
-            console.log("bear");
+        case "Triceratops":
+            animal = new Triceratops(name);
+            console.log("triceratops");
             break;
-        case "Pig":
-            animal = new Pig(name);
-            console.log("pig");
+        case "Velociraptor":
+            animal = new Velociraptor(name);
+            console.log("velociraptor");
             break;
-        case "Owl":
-            animal = new Owl(name);
-            console.log("owl");
+        case "Pteradactyl":
+            animal = new Pteradactyl(name);
+            console.log("pteradactyl");
             break;
-        case "Donkey":
-            animal = new Donkey(name);
-            console.log("donkey");
+        case "Brontosauras":
+            animal = new Brontosauras(name);
+            console.log("brontosauras");
     }
 
     listAnimal(animal);
@@ -69,14 +69,14 @@ function listAnimal(animal){
     allAnimals.push(animal);
     console.log(allAnimals);
 
-    $("#listHead").text("Your Animals");
+    $("#listHead").text("Your Dinosaurs:");
     var name = "";
     var ani = "";
     for(var i = 0; i < allAnimals.length; i++){
         if(allAnimals[i] === animal){
             name = allAnimals[i].name;
             ani = allAnimals[i].constructor.name;
-            $("#list").append("<li>" + name + " the " + ani + "</li>");
+            $("#list").append("<div>" + name + " the " + ani + "</div>");
         }
     }
 }
@@ -112,13 +112,13 @@ class Animal {
     }
 }
 
-class Tiger extends Animal{
+class Trex extends Animal{
     constructor(name) {
         super(name, "Extract of Malt");
     }
 }
 
-class Bear extends Animal{
+class Triceratops extends Animal{
     constructor(name) {
         super(name, "Honey");
     }
@@ -128,7 +128,7 @@ class Bear extends Animal{
     }
 }
 
-class Pig extends Animal{
+class Velociraptor extends Animal{
     constructor(name){
         super(name, "Acorns");
     }
@@ -138,7 +138,7 @@ class Pig extends Animal{
     }
 }
 
-class Owl extends Animal{
+class Pteradactyl extends Animal{
     constructor(name){
         super(name, "Knowledge");
     }
@@ -150,7 +150,7 @@ class Owl extends Animal{
     }
 }
 
-class Donkey extends Animal{
+class Brontosauras extends Animal{
     constructor(name){
         super(name, "Thistles");
     }

@@ -1,0 +1,13 @@
+body{
+
+    background: url("images/dino.jpg") no-repeat;
+    background-size: cover;
+}
+
+#all{
+    position: relative;
+    left: auto;
+    right: auto;
+    text-align: center;
+}
+
