@@ -2,20 +2,20 @@ var animalPopulation = 0;
 var allAnimals = [];
 
 function run(){
-    var tigger = new Trex("Tigger");
+    var tigger = new Tyrannosaurus("Tigger");
 
     var pooh = new Triceratops("Pooh");
 
-    var piglet = new Velociraptor("Piglet");
+    var piglet = new Stegosaurus("Piglet");
 
-    var owl = new Pteradactyl("Pteradactyl");
+    var pterry = new Pteradactyl("Pterry");
 
     var eeyore = new Brontosauras("Eeyore");
 
     listAnimal(tigger);
     listAnimal(pooh);
     listAnimal(piglet);
-    listAnimal(owl);
+    listAnimal(pterry);
     listAnimal(eeyore);
     console.log(allAnimals);
 }
@@ -29,23 +29,25 @@ $(document).ready(function(){
     });
     $("#del").click(function(){
         deleteAnimal($("#nameDel").val());
-    })
+    });
+    $("#change").click(function(){
+        changeName($("#oldName").val(),$("#newName").val());
+    });
 });
 
 function createAnimal(name){
     var animal = "";
     switch($("#ani").val()){
-        case "Trex":
-            animal = new Trex(name);
-            console.log("trex");
+        case "Tyrannosaurus":
+            animal = new Tyrannosaurus(name);
             break;
         case "Triceratops":
             animal = new Triceratops(name);
             console.log("triceratops");
             break;
-        case "Velociraptor":
-            animal = new Velociraptor(name);
-            console.log("velociraptor");
+        case "Stegosaurus":
+            animal = new Stegosaurus(name);
+            console.log("stegosaurus");
             break;
         case "Pteradactyl":
             animal = new Pteradactyl(name);
@@ -57,9 +59,11 @@ function createAnimal(name){
     }
 
     listAnimal(animal);
+    $("#actions").html("<div>" + name + " the " + animal.constructor.name + " was created</div>");
 }
 
 function feedAnimal(food){
+    $("#actions").html("");
     for(var i = 0; i <  allAnimals.length; i++){
         allAnimals[i].eat(food);
     }
@@ -76,7 +80,7 @@ function listAnimal(animal){
         if(allAnimals[i] === animal){
             name = allAnimals[i].name;
             ani = allAnimals[i].constructor.name;
-            $("#list").append("<div>" + name + " the " + ani + "</div>");
+            $("#list").append("<div class=" + name + ">" + name + " the " + ani + "</div>");
         }
     }
 }
@@ -84,9 +88,24 @@ function listAnimal(animal){
 function deleteAnimal(name){
     for(var i = 0; i < allAnimals.length; i++){
         if(allAnimals[i].name === name){
+            $("#actions").html("<div>" + name + " the " + allAnimals[i].constructor.name  + " was deleted</div>");
             allAnimals.splice(i, 1);
         }
     }
+    $("." + name).hide();
+
+}
+
+function changeName(oldName, newName){
+    for(var i = 0; i < allAnimals.length; i++){
+        if(oldName === allAnimals[i].name){
+            allAnimals[i].name = newName;
+            $("." + oldName).html("<div class=" + newName + ">" + newName + " the " + allAnimals[i].constructor.name + "</div>");
+        }
+    }
+    //listAnimal(newName);
+    $("#actions").html("<div>" + oldName + "'s name is now " + newName);
+
 }
 
 class Animal {
@@ -106,21 +125,17 @@ class Animal {
         (food === this.favoriteFood) ? $("#actions").append("<div>YUM!!! " + this.name + " wants more " + food + "</div>") : this.sleep();
 
     }
-
-    static getPopulation(){
-        return animalPopulation;
-    }
 }
 
-class Trex extends Animal{
+class Tyrannosaurus extends Animal{
     constructor(name) {
-        super(name, "Extract of Malt");
+        super(name, "Cheese");
     }
 }
 
 class Triceratops extends Animal{
     constructor(name) {
-        super(name, "Honey");
+        super(name, "Squash");
     }
 
     sleep() {
@@ -128,9 +143,9 @@ class Triceratops extends Animal{
     }
 }
 
-class Velociraptor extends Animal{
+class Stegosaurus extends Animal{
     constructor(name){
-        super(name, "Acorns");
+        super(name, "Pasta");
     }
 
     sleep(){
@@ -152,7 +167,7 @@ class Pteradactyl extends Animal{
 
 class Brontosauras extends Animal{
     constructor(name){
-        super(name, "Thistles");
+        super(name, "Figs");
     }
 
     sleep(){
@@ -165,16 +180,3 @@ class Brontosauras extends Animal{
             food + "</div>") + $("#actions").append("<div>YUCK!!! " + this.name + " will not eat " + food + "</div>");
     }
 }
-
-// class Zookeeper{
-//     constructor(name){
-//         this.name = name;
-//     }
-//
-//     feedAnimals(food, animals){
-//         console.log(this.name + " is feeding " + food + " to " + animals.length + " animals " + animalPopulation + " total animals");
-//         for(var i = 0; i < animals.length; i++){
-//             animals[i].eat(food);
-//         }
-//     }
-// }

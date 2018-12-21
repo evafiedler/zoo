@@ -11,3 +11,26 @@ body{
     text-align: center;
 }
 
+#print,#log{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 30%;
+    font-family: Eurostile;
+}
+
+h1{
+    color: lightgray;
+    text-shadow: 2px 3px 6px darkgray;
+    font-family: Rockwell;
+
+}
+
+#createAnimal,#feedAnimal,#deleteAnimal,#changeName{
+    font-family: Eurostile;
+    position: relative;
+    top: 5px;
+    bottom: 5px;
+}

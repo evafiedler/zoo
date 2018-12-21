@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DINOSAURS!!!</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="zoo.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body onload="run()">
-<div id="all"><h1>Off Brand Jurassic Park</h1>
+<div id="all">
+    <h1>Off Brand Jurassic Park</h1>
     <div id="createAnimal">
         <div>Dino Name:</div>
         <input type="text" id="name"><br>
         <div>Dino Type:</div>
         <select id="ani">
-            <option>Trex</option>
+            <option>Tyrannosaurus</option>
             <option>Triceratops</option>
-            <option>Velociraptor</option>
+            <option>Stegosaurus</option>
             <option>Pteradactyl</option>
             <option>Brontosaurus</option>
         </select><br>
@@ -25,11 +27,11 @@
     <div id="feedAnimal">
         <div>Feed the Dinosaurs!</div>
         <select id="food">
-            <option>Extract of Malt</option>
-            <option>Honey</option>
-            <option>Acorns</option>
+            <option>Cheese</option>
+            <option>Squash</option>
+            <option>Pasta</option>
             <option>Knowledge</option>
-            <option>Thistles</option>
+            <option>Figs</option>
         </select>
         <button id="feed">Feed</button>
     </div>
@@ -38,16 +40,23 @@
         <input type="text" id="nameDel">
         <button id="del">Delete</button>
     </div>
+    <div id="changeName">
+        <div>Original Name:</div>
+        <input type="text" id="oldName">
+        <div>New Name:</div>
+        <input type="text" id="newName">
+        <button id="change">Change Name</button>
+    </div>
     <div id="print">
-        <div id="listHead"></div>
+        <h4 id="listHead"></h4>
         <div id="list">
         </div>
     </div>
-    <div id="actions">
+    <div id="log">
         <h4>What's going on with your dinosaurs?</h4>
-
+        <div id="actions">
+        </div>
     </div>
 </div>
-<!--button onclick="run()" id="a">button</--button-->
 </body>
 </html>
